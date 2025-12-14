@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Add Student Data</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body class="p-4 flex justify-center bg-gray-100 font-sans">
+  <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-5xl">
+    <div class="flex items-center justify-between mb-8 pb-4 border-b">
+        <h1 class="text-3xl font-bold text-gray-800">Add New Student</h1>
+        <!-- Link back to the main dashboard -->
+        <a href="{{ url_for('index') }}" class="text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">
+            &larr; Back to Dashboard
+        </a>
+    </div>
+
+    <!-- Add Student Form -->
+    <form id="studentForm" class="space-y-6 max-w-xl mx-auto p-8 bg-gray-50 rounded-xl shadow-inner border border-gray-200">
+      <h2 class="text-2xl font-semibold text-gray-700 text-center">Student Information and Course Selection</h2>
+      
+      <div>
+        <label for="student_name" class="block text-gray-700 font-medium mb-1">Student Name</label>
+        <input type="text" id="student_name" name="student_name" placeholder="E.g., Priya Sharma" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:ring-indigo-500 focus:border-indigo-500" required>
+      </div>
+      
+      <div>
+        <label for="student-batch-select" class="block text-gray-700 font-medium mb-1">Batch</label>
+        <select id="student-batch-select" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:ring-indigo-500 focus:border-indigo-500 bg-white" required>
+            <option value="" disabled selected>Select Batch...</option>
+        </select>
+      </div>
+      
+      <div>
+        <label for="student-courses-select" class="block text-gray-700 font-medium mb-1">Select Courses (Major, Minor, Skill-Based)</label>
+        <select id="student-courses-select" name="course_choices" multiple class="mt-1 block w-full rounded-md border-gray-300 shadow-sm h-40 p-3 focus:ring-indigo-500 focus:border-indigo-500 bg-white" required>
+            <!-- Options populated by JavaScript -->
+        </select>
+        <p class="text-xs text-gray-500 mt-1">Hold Ctrl/Cmd to select multiple courses.</p>
+      </div>
+      
+      <button type="submit" class="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300 transform hover:scale-[1.01] shadow-md">
+        Add Student to Database
+      </button>
+      <div id="student-message" class="mt-4 text-center"></div>
+    </form>
+    
+  </div>
+
+  <!-- Message Modal and Script inclusion -->
+  <div id="message-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden">
+    <div id="message-modal-content" class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full mx-4 text-center">
+      <h3 id="modal-title" class="text-xl font-bold mb-2"></h3>
+      <p id="modal-body" class="mb-4 text-gray-700"></p>
+      <button id="modal-ok-btn" class="bg-indigo-600 text-white py-2 px-4 rounded-lg font-semibold">OK</button>
+    </div>
+  </div>
+
+  <!-- Main application logic -->
+  <script type="module" src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
